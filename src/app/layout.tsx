@@ -14,6 +14,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "App Live Tracker - Monitor Your Applications",
   description: "A comprehensive application monitoring system with real-time alerts and health checks",
+
 };
 
 export default function RootLayout({
@@ -23,6 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+      </head>
       <body
         className={` ${montserrat.variable} antialiased`}
       >

@@ -6,10 +6,12 @@ import { App } from '@/lib/database';
 import AppCard from '@/components/AppCard';
 import AddAppModal from '@/components/AddAppModal';
 import LogsModal from '@/components/LogsModal';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 export default function Home() {
   const [apps, setApps] = useState<App[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showLogsModal, setShowLogsModal] = useState(false);
   const [selectedAppId, setSelectedAppId] = useState<number | null>(null);
@@ -31,7 +33,16 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Show loader after 2 seconds if still loading
+    const loaderTimer = setTimeout(() => {
+      if (isLoading) {
+        setShowLoader(true);
+      }
+    }, 2000);
+
     fetchApps();
+
+    return () => clearTimeout(loaderTimer);
   }, []);
 
   const handleAddApp = async (data: { name: string; url: string; checkInterval: number }) => {
@@ -126,13 +137,10 @@ export default function Home() {
     unknown: apps.filter(app => app.last_status === null).length,
   };
 
-  if (isLoading) {
+  if (isLoading && showLoader) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading apps...</p>
-        </div>
+        <ClimbingBoxLoader size={20} color="#0075FF" loading={isLoading} speedMultiplier={2}/>
       </div>
     );
   }
