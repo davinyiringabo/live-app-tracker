@@ -1,13 +1,13 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const fs = require('fs');
+import sqlite3 from 'sqlite3';
+import { join } from 'path';
+import { existsSync, mkdirSync } from 'fs';
 
-const dbPath = path.join(process.cwd(), 'data', 'monitor.db');
+const dbPath = join(process.cwd(), 'data', 'monitor.db');
 
 // Ensure data directory exists
-const dataDir = path.join(process.cwd(), 'data');
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
+const dataDir = join(process.cwd(), 'data');
+if (!existsSync(dataDir)) {
+  mkdirSync(dataDir, { recursive: true });
 }
 
 console.log('Setting up database...');
