@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { App } from '@/lib/database';
-import { formatDate, formatResponseTime, getStatusColor, getStatusIcon, cn } from '@/lib/utils';
+import { formatDate, getStatusColor, getStatusIcon, cn } from '@/lib/utils';
 import { Trash2, Edit, Eye, RefreshCw } from 'lucide-react';
 
 interface AppCardProps {

@@ -24,7 +24,7 @@ class MonitorService {
     const startTime = Date.now();
     
     try {
-      const response = await axios.get(app.url, {
+      await axios.get(app.url, {
         timeout: 10000, // 10 second timeout
         validateStatus: (status) => status < 500, // Consider 5xx as down
       });
@@ -179,11 +179,17 @@ class MonitorService {
   }
 
   getMonitoringStatus(): { isRunning: boolean; nextCheck?: string } {
-    const status = { isRunning: this.isRunning };
+    const status: { isRunning: boolean; nextCheck?: string } = { isRunning: this.isRunning };
     
+    // Note: node-cron doesn't provide nextDates method in its type definitions
+    // We'll calculate the next check time based on the cron schedule
     if (this.cronJob) {
-      const nextDate = this.cronJob.nextDates(1)[0];
-      status.nextCheck = nextDate?.toISOString();
+      // Since we're using '0 * * * *' (every hour at minute 0), 
+      // the next check will be at the start of the next hour
+      const now = new Date();
+      const nextHour = new Date(now);
+      nextHour.setHours(now.getHours() + 1, 0, 0, 0);
+      status.nextCheck = nextHour.toISOString();
     }
     
     return status;

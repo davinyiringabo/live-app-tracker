@@ -60,7 +60,7 @@ export default function Home() {
     }
   };
 
-  const handleEditApp = (app: App) => {
+  const handleEditApp = () => {
     // TODO: Implement edit functionality
     alert('Edit functionality coming soon!');
   };
