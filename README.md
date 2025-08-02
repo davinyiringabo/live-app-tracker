@@ -200,10 +200,6 @@ Check the console output for detailed logs about:
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
-
-MIT License - see LICENSE file for details
-
 ## Support
 
 If you encounter any issues or have questions, please open an issue on GitHub.
