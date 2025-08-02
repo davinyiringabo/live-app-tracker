@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #414040;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-montserrat);
+  --font-mono: var(--font-montserrat);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #414040;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Poppins','montserrat', Arial, Helvetica, sans-serif, montserrat;
+}
